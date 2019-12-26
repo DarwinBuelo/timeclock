@@ -33,7 +33,9 @@ if ($restrict_ips == "yes") {
 $table = "dbversion";
 
 $result = DBcon::execute("SHOW TABLES LIKE '".$db_prefix.$table."'");
+Util::debug($result);
 $rows = $result->num_rows;
+
 
 if ($rows == "1") {
     $dbexists = "1";

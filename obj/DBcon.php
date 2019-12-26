@@ -83,9 +83,16 @@ class DBcon
         }
     }
 
+    /**
+     * TODO: query must be clean before actual execution
+     *
+     * @param type $query
+     * @return boolean
+     */
     public static function execute($query)
     {
         self::connect();
+        //$query = static::clean($query);
         if ($result = mysqli_query(self::$conn, $query)) {
             return $result;
         } else {

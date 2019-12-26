@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 $self = $_SERVER['PHP_SELF'];
 $request = $_SERVER['REQUEST_METHOD'];
 

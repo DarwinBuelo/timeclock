@@ -22,23 +22,18 @@ if ($restrict_ips == "yes") {
 }
 
 // check for correct db version //
-
-@ $db = mysql_pconnect($db_hostname, $db_username, $db_password);
-if (!$db) {echo "Error: Could not connect to the database. Please try again later."; exit;}
-mysql_select_db($db_name);
-
 $table = "dbversion";
-$result = mysql_query("SHOW TABLES LIKE '".$db_prefix.$table."'");
-@$rows = mysql_num_rows($result);
+$result = DBcon::execute("SHOW TABLES LIKE '".$db_prefix.$table."'");
+@$rows = $result->num_rows;
 if ($rows == "1") {
 $dbexists = "1";
 } else {
 $dbexists = "0";
 }
 
-$db_version_result = mysql_query("select * from ".$db_prefix."dbversion");
-while (@$row = mysql_fetch_array($db_version_result)) {
-  @$my_dbversion = "".$row["dbversion"]."";
+$db_version_result = DBcon::execute("select * from ".$db_prefix."dbversion");
+while (@$row = DBcon::fetch_all_array($db_version_result)) {
+    @$my_dbversion = "".$row["dbversion"]."";
 }
 
 // include css and timezone offset//
